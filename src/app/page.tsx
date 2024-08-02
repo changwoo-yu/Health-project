@@ -1,113 +1,72 @@
+"use client";
 import Image from "next/image";
+import BasicMap from "./(header)/map/page";
+import SwiperImg from "./(header)/slider/page";
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div>
+      <div className="text-slate-700 w-full h-full place-items-center mx-auto max-w-[1000px] font-bold">
+        <div className="mt-10 min-w-[1000px]">
+          <h1 className="text-xl text-red-400 font-bold">체육관 소개</h1>
+          <hr className="border-gray-300 my-4" />
+          <p className="text-center text-2xl">PoketFit💪</p>
+          <p className="text-center text-gray-500">
+            프라이빗한 레슨환경 운동지도 경력 15년 이상 전문성을 가진 지도자 수업 시간 약속 철저 깨끗하고 매너있는
+            헬스장 입니다.
+          </p>
+          <p className="mb-10 text-center text-gray-500">감사합니다</p>
+          <SwiperImg />
+        </div>
+        <div className="min-w-[1000px] mt-20">
+          <h1 className="text-xl text-red-400 font-bold">트레이너 소개</h1>
+          <hr className="border-gray-300 my-4" />
+          <div className="flex justify-between">
+            <div className="flex border border-black bg-gray-800">
+              <Image className=" mr-3" src="/images/user2.jpg" alt="트레이너1" width={300} height={100} />
+              <div className="text-lg text-white items-center">
+                <p className="mt-5">* 트레이너 경력 20년</p>
+                <p>* 헬스장 3회 경험</p>
+                <p>* 마라톤 대회 수상</p>
+                <p>* PT 경험 30회</p>
+                <p>* 3대 700</p>
+              </div>
+            </div>
+            <div className="flex border border-black bg-gray-800">
+              <Image className=" mr-3" src="/images/user2.jpg" alt="트레이너2" width={300} height={100} />
+              <div className=" mt-7 text-lg text-white">
+                <p>* 경력 10년</p>
+                <p>* 런닝머신 뛰기</p>
+                <p>* 자전거 자격증</p>
+                <p>* PT 경험 3회</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="min-w-[1000px] mt-20">
+          <h1 className="text-xl text-red-400 font-bold">오시는길</h1>
+          <hr className="border-gray-300 my-4" />
+          <div>
+            <BasicMap />
+          </div>
+          <div>
+            <hr className="border-gray-300 my-4" />
+            <p className="mb-3  text-red-400 ">위치</p>
+            <p className="text-gray-500">1321515번지 포켓 헬스장</p>
+            <hr className="border-gray-300 my-4" />
+            <p className="mb-3  text-red-400">전화</p>
+            <p className="text-gray-500">070-1213-2135</p>
+
+            <hr className="border-gray-300 my-4" />
+            <h1 className="mb-3  text-red-400">영업시간</h1>
+            <p className="mb-1 text-gray-500">월 ~ 토 : 오전 6시 ~ 오후 10시</p>
+            <p className="mb-20 text-gray-500">매주 일요일 휴무</p>
+          </div>
         </div>
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
-}
+};
+
+export default Home;
