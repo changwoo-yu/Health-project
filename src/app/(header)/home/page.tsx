@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import BasicMap from "./components/map/page";
-import SwiperImg from "./components/slider/page";
+import SwiperImg from "../../components/slider/page";
+import BasicMap from "../../components/map/page";
 
 const Home = () => {
   return (
