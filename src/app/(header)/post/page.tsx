@@ -1,8 +1,11 @@
 "use client";
-
+import React from "react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Post = () => {
+  const [isClick, setIsClick] = useState(false);
   const [posts, setPosts] = useState<any[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +16,13 @@ const Post = () => {
 
     fetchData();
   }, []);
+
+  const router = usePathname();
+  const uploadUrl = router === "/upload";
+  const handleClick = () => {
+    setIsClick(!isClick);
+  };
+
   return (
     <div className="ml-12 mr-12">
       <h1 className="m-4 mt-8 text-xl text-red-400 font-bold">전체 게시글</h1>
@@ -21,7 +31,16 @@ const Post = () => {
           <input className="p-2 border-b border-gray-300 mt-10 mr-4" type="text" placeholder="게시글 검색" />
           <button className="border p-2 rounded-lg mb-5 bg-red-300 text-white">검색</button>
         </div>
-        <button className="border p-2 rounded-lg mb-5 mt-10 bg-red-300 text-white">글 올리기</button>
+        <Link href="upload">
+          <button
+            onClick={handleClick}
+            className={`border p-2 rounded-lg mb-5 mt-10 bg-red-300 text-white ${
+              uploadUrl ? "text-neutral-400" : "text-white"
+            }`}
+          >
+            글 올리기
+          </button>
+        </Link>
       </div>
       <div>
         <main>
