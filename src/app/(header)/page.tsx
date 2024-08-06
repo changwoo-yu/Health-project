@@ -2,18 +2,17 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const FitHeader = () => {
   const router = usePathname();
-  const homeUrl = router === "/home";
   const loginUrl = router === "/login";
   const mypageUrl = router === "/mypage";
   const noticeUrl = router === "/notice";
   const postUrl = router === "/post";
   const signupUrl = router === "/signup";
-  console.log(homeUrl);
   const [isMenu, setMenu] = useState(false);
+
   const handleToggle = () => {
     setMenu(!isMenu);
   };
@@ -38,9 +37,6 @@ const FitHeader = () => {
             isMenu ? "block" : "hidden"
           } md:flex md:flex-row md:space-x-4 md:space-y-0`}
         >
-          <Link href="/home">
-            <li className={`cursor-pointer ${homeUrl ? "text-neutral-400" : "text-white"}`}>홈</li>
-          </Link>
           <Link href="/post">
             <li className={`cursor-pointer ${postUrl ? "text-neutral-400" : "text-white"}`}>게시글</li>
           </Link>
