@@ -1,6 +1,10 @@
 "use client";
 const Notice = () => {
-  return <div>공지사항</div>;
+  return (
+    <div>
+      
+    </div>
+  );
 };
 
 export default Notice;

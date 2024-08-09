@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -8,12 +7,19 @@ const Post = () => {
   const [isClick, setIsClick] = useState(false);
   const [posts, setPosts] = useState<any[]>([]);
   useEffect(() => {
+    const getTitle = localStorage.getItem("title");
+    const getContent = localStorage.getItem("content");
+    const localPosts: { title: any; content: any }[] = [];
+    if (getTitle && getContent) {
+      const post = { title: JSON.parse(getTitle), content: JSON.parse(getContent) };
+      localPosts.push(post);
+    }
+
     const fetchData = async () => {
       const response = await fetch("/data/data.json");
       const data = await response.json();
-      setPosts(data);
+      setPosts([...localPosts, ...data]);
     };
-
     fetchData();
   }, []);
 
@@ -45,20 +51,20 @@ const Post = () => {
       <div>
         <main>
           <ul>
-            {posts.map((post) => (
-              <li key={post.id} className=" rounded-lg bg-slate-50 p-5 m-4">
-                <h2 className="font-bold text-xl text-gray-700">{post.title}</h2>
+            {posts.map((post, index) => (
+              <li key={index} className=" rounded-lg bg-slate-50 p-5 m-4">
+                <h2 className="font-bold text-xl text-gray-700" dangerouslySetInnerHTML={{ __html: post.title }}></h2>
                 <p className="text-sm mb-5 text-gray-600">작성자: {post.author}</p>
-                <p className="font-bold mb-5 text-gray-600">{post.content}</p>
+                <p className="font-bold mb-5 text-gray-600" dangerouslySetInnerHTML={{ __html: post.content }}></p>
                 <hr className="border-gray-300 w-1000 mb-4" />
                 <div className="flex justify-between">
-                  <div className="flex justify-center items-center w-full">
+                  {/* <div className="flex justify-center items-center w-full">
                     <button className="mr-10 border p-2 rounded-lg bg-red-300 text-white">{post.buttons.view}</button>
                     <button className="mr-10 border p-2 rounded-lg bg-red-300 text-white">
-                      {post.buttons.comment}
+                    {post.buttons.comment}
                     </button>
                     <button className="mr-10 border p-2 rounded-lg bg-red-300 text-white">{post.buttons.share}</button>
-                  </div>
+                  </div> */}
                 </div>
               </li>
             ))}
