@@ -5,7 +5,7 @@ import Image from "next/image";
 const Sidebar = ({ isMenu, handleToggle }: any) => {
   return (
     <div
-      className={`h-full w-[300px] bg-gray-800 right-0 text-white p-10 transition-transform ${
+      className={`h-[350px] w-[300px] bg-gray-800 right-0 text-white p-10 transition-transform ${
         isMenu ? "block" : "hidden"
       }`}
     >
@@ -14,19 +14,19 @@ const Sidebar = ({ isMenu, handleToggle }: any) => {
       </button>
       <ul className="mt-5">
         <Link href="/post">
-          <li className="cursor-pointer">게시글</li>
+          <li className="cursor-pointer mb-4">게시글</li>
         </Link>
         <Link href="/mypage">
-          <li className="cursor-pointer">마이페이지</li>
+          <li className="cursor-pointer mb-4">마이페이지</li>
         </Link>
         <Link href="/notice">
-          <li className="cursor-pointer">공지사항</li>
+          <li className="cursor-pointer mb-4">공지사항</li>
         </Link>
         <Link href="/login">
-          <li className="cursor-pointer">로그인</li>
+          <li className="cursor-pointer mb-4">로그인</li>
         </Link>
         <Link href="/signup">
-          <li className="cursor-pointer">회원가입</li>
+          <li className="cursor-pointer mb-4">회원가입</li>
         </Link>
       </ul>
     </div>

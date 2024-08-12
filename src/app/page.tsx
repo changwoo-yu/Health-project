@@ -6,9 +6,9 @@ import SwiperImg from "./components/slider/page";
 const Home = () => {
   return (
     <div>
-      <div className="text-slate-700 w-full h-full place-items-center mx-auto max-w-[1000px] font-bold">
-        <div className="mt-10 min-w-[1000px]">
-          <h1 className="text-xl text-red-400 font-bold">체육관 소개</h1>
+      <div className="text-slate-700 h-full font-bold ml-12 mr-12">
+        <div className="">
+          <h1 className="mt-8 m-4 mb-20 text-xl text-red-400 font-bold">체육관 소개</h1>
           <hr className="border-gray-300 my-4" />
           <p className="text-center text-2xl">PoketFit💪</p>
           <p className="text-center text-gray-500">
@@ -18,11 +18,11 @@ const Home = () => {
           <p className="mb-10 text-center text-gray-500">감사합니다</p>
           <SwiperImg />
         </div>
-        <div className="min-w-[1000px] mt-20">
+        <div className="mt-20">
           <h1 className="text-xl text-red-400 font-bold">트레이너 소개</h1>
           <hr className="border-gray-300 my-4" />
-          <div className="flex justify-between">
-            <div className="flex border border-black bg-gray-800">
+          <div className="flex justify-center items-center">
+            <div className="flex border border-black bg-gray-800 ">
               <Image className=" mr-3" src="/images/user2.jpg" alt="트레이너1" width={300} height={100} />
               <div className="text-lg text-white items-center">
                 <p className="mt-5">* 트레이너 경력 20년</p>

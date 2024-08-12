@@ -63,7 +63,7 @@ const Upload = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center flex-col">
         <QuillNoSSRWrapper
           className="m-4 max-w-1000px w-full h-[500px]"
           modules={modules}
@@ -71,11 +71,11 @@ const Upload = () => {
           onChange={(test) => console.log(test)}
           value={content || ""}
         />
-      </div>
-      <div className="flex justify-center">
-        <button onClick={handleSubmit} className="mt-10 m-4 p-2 bg-red-300 text-white rounded-md">
-          글 올리기
-        </button>
+        <div className="flex justify-center w-full mt-4">
+          <button onClick={handleSubmit} className="mt-10 m-4 p-2 bg-red-300 text-white rounded-md">
+            글 올리기
+          </button>
+        </div>
       </div>
     </div>
   );
