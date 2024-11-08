@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import CommentSection from "./CommentSection";
 import { useRouter } from "next/navigation";
 import ShareButton from "./ShareButton";
+import CommentSection from "./CommentSection";
 
 interface Post {
   id: any;

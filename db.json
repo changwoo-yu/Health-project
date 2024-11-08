@@ -78,6 +78,11 @@
           "content": "..",
           "createdAt": "2024-11-08T11:20:15.437Z",
           "author": "김무찌"
+        },
+        {
+          "content": "z",
+          "createdAt": "2024-11-08T18:59:43.509Z",
+          "author": "안녕"
         }
       ]
     },
@@ -121,6 +126,12 @@
       "password": "qqqq1234",
       "name": "ok",
       "phone": "010-0010-0000"
+    },
+    {
+      "id": "dkssud",
+      "password": "dkssud123",
+      "name": "안녕",
+      "phone": "010-2012-0110"
     }
   ]
 }

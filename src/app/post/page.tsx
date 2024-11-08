@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SearchBar from "./components/SearchBar";
-import PostList from "./components/PostList";
 import { useRouter } from "next/navigation";
-import SkeletonPost from "./components/SkeletonPost";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import SkeletonPost from "./components/SkeletonPost";
+import PostList from "./components/PostList";
 
 const Post = () => {
   const [isClick, setIsClick] = useState(false);
