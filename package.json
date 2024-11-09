@@ -8,9 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "json-server": "json-server --watch db.json --port 8888",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "homepage": "https://changwoo-yu.github.io/Health-project/"
+    "deploy": "next build && touch out/.nojekyll && git add -f out/ && git commit -m \"Deploy\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
