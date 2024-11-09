@@ -38,7 +38,7 @@ export default function SwiperImg() {
         {slideData.map((slide) => (
           <SwiperSlide key={slide.id}>
             <div className="flex justify-center items-center">
-              <img className="w-[600px] h-[300px] rounded-lg shadow-lg" src={slide.img} />
+              <img className="w-[600px] h-[300px] rounded-lg shadow-lg" src={slide.img} alt="스와이퍼 사진" />
             </div>
           </SwiperSlide>
         ))}
