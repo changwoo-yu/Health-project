@@ -10,6 +10,7 @@ const Login = ({ onLogin }: any) => {
   const [loading, setLoading] = useState(true);
   const { login } = useAuth();
   const router = useRouter();
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,6 +18,13 @@ const Login = ({ onLogin }: any) => {
     });
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
   }, []);
 
   const handleLoginClick = async (e: any) => {

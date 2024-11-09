@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const PasswordChange = () => {
@@ -8,8 +8,14 @@ const PasswordChange = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isTrue, setIsTrue] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
 
-  const userId = localStorage.getItem("userId");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUserId = localStorage.getItem("userId");
+      setUserId(storedUserId);
+    }
+  }, []);
 
   const handlePasswordChange = async (e: any) => {
     e.preventDefault();

@@ -33,19 +33,21 @@ const Upload = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const storedUserId = localStorage.getItem("userId");
+      if (typeof window !== "undefined") {
+        const storedUserId = localStorage.getItem("userId");
 
-      if (storedUserId) {
-        setUserId(storedUserId);
-        try {
-          const response = await axios.get("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
-          const user = response.data.find((user: any) => user.id === storedUserId);
+        if (storedUserId) {
+          setUserId(storedUserId);
+          try {
+            const response = await axios.get("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
+            const user = response.data.find((user: any) => user.id === storedUserId);
 
-          if (user) {
-            setAuthor(user.name);
+            if (user) {
+              setAuthor(user.name);
+            }
+          } catch (error) {
+            console.error("사용자 정보를 가져오는 중 오류 발생:", error);
           }
-        } catch (error) {
-          console.error("사용자 정보를 가져오는 중 오류 발생:", error);
         }
       }
     };

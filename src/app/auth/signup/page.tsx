@@ -111,7 +111,7 @@ const Signup = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8888/users", {
+      const response = await fetch("https://my-json-server.typicode.com/changwoo-yu/Health-project/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

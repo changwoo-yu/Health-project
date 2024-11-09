@@ -21,25 +21,30 @@ const Mypage = () => {
     const fetchData = async () => {
       const response = await fetch("/data/data.json");
       const data = await response.json();
-      const userId = localStorage.getItem("userId");
-      if (userId) {
-        const userPosts = data.filter((post: any) => post.userId === userId);
-        setPosts(userPosts);
-      } else {
-        setPosts(data);
+
+      if (typeof window !== "undefined") {
+        const userId = localStorage.getItem("userId");
+        if (userId) {
+          const userPosts = data.filter((post: any) => post.userId === userId);
+          setPosts(userPosts);
+        } else {
+          setPosts(data);
+        }
       }
     };
     fetchData();
   }, []);
 
   const getUserData = async () => {
-    const userId = localStorage.getItem("userId");
-    if (userId) {
-      const url = "https://my-json-server.typicode.com/changwoo-yu/Health-project/users";
-      const response = await fetch(url);
-      const data = await response.json();
-      const user = data.find((user: any) => user.id === userId);
-      setUserData(user);
+    if (typeof window !== "undefined") {
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        const url = "https://my-json-server.typicode.com/changwoo-yu/Health-project/users";
+        const response = await fetch(url);
+        const data = await response.json();
+        const user = data.find((user: any) => user.id === userId);
+        setUserData(user);
+      }
     }
   };
 

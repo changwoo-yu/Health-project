@@ -27,8 +27,10 @@ const PostDetail = ({ params }: any) => {
       setPost(response.data);
     };
 
-    const storedUserId = localStorage.getItem("userId");
-    setUserId(storedUserId);
+    if (typeof window !== "undefined") {
+      const storedUserId = localStorage.getItem("userId");
+      setUserId(storedUserId);
+    }
 
     fetchPost();
   }, [id]);

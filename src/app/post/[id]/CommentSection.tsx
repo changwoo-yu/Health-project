@@ -21,24 +21,26 @@ const CommentSection = ({ postId }: any) => {
       );
       setComments(response.data.comments || []);
     };
-    
+
     fetchPost();
   }, [postId]);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const userId = localStorage.getItem("userId");
+      if (typeof window !== "undefined") {
+        const userId = localStorage.getItem("userId");
 
-      if (userId) {
-        try {
-          const response = await axios.get("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
-          const user = response.data.find((user: any) => user.id === userId);
+        if (userId) {
+          try {
+            const response = await axios.get("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
+            const user = response.data.find((user: { id: string }) => user.id === userId);
 
-          if (user) {
-            setAuthor(user.name);
+            if (user) {
+              setAuthor(user.name);
+            }
+          } catch (error) {
+            console.error("사용자 정보를 가져오는 중 오류 발생:", error);
           }
-        } catch (error) {
-          console.error("사용자 정보를 가져오는 중 오류 발생:", error);
         }
       }
     };
