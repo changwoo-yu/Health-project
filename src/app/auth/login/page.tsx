@@ -1,10 +1,10 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import "react-loading-skeleton/dist/skeleton.css";
 import { useAuth } from "@/app/context/AuthContext";
+import Link from "next/link";
 import SkeletonLogin from "./SkeletonLogin";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Login = ({ onLogin }: any) => {
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ const Login = ({ onLogin }: any) => {
     const passwordInput = e.target.password.value;
 
     try {
-      const response = await fetch("http://localhost:8888/users");
+      const response = await fetch("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
       const users = await response.json();
 
       const user = users.find((user: any) => user.id === idInput && user.password === passwordInput);

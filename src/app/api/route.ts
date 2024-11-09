@@ -6,6 +6,3 @@ export async function GET(request: Request) {
 
   return NextResponse.json({ data });
 }
-
-// const { searchParams } = new URL(request.url);
-// const page = searchParams.get("page");

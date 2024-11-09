@@ -18,7 +18,7 @@ const Post = () => {
   const route = useRouter();
 
   const getList = async () => {
-    const url = `http://localhost:8888/posts`;
+    const url = `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts`;
     const response = await fetch(url);
     const data = await response.json();
     setList(data);
@@ -59,7 +59,9 @@ const Post = () => {
   };
 
   const handleDelete = async (postId: any) => {
-    const response = await axios.delete(`http://localhost:8888/posts/${postId}`);
+    const response = await axios.delete(
+      `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${postId}`
+    );
     console.log("삭제된 데이터:", response.data);
     getList();
   };

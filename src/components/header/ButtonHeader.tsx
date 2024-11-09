@@ -5,7 +5,7 @@ interface ButtonHeaderProps {
   href: string;
   isActive: boolean;
   children: React.ReactNode;
-  onClick?: (e: React.MouseEvent) => void; // onClick prop 추가
+  onClick?: (e: React.MouseEvent) => void; 
 }
 
 const ButtonHeader: React.FC<ButtonHeaderProps> = ({ href, isActive, children, onClick }) => {

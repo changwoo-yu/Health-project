@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -32,7 +33,9 @@ const PasswordChange = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:8888/users/${userId}`);
+      const response = await axios.get(
+        `https://my-json-server.typicode.com/changwoo-yu/Health-project/users/${userId}`
+      );
 
       if (response.data.password !== currentPassword) {
         setMessage("현재 비밀번호가 틀립니다.");
@@ -46,7 +49,7 @@ const PasswordChange = () => {
         return;
       }
 
-      await axios.patch(`http://localhost:8888/users/${userId}`, {
+      await axios.patch(`https://my-json-server.typicode.com/changwoo-yu/Health-project/users/${userId}`, {
         password: newPassword,
       });
 

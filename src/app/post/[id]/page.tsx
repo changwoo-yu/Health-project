@@ -23,7 +23,7 @@ const PostDetail = ({ params }: any) => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await axios.get(`http://localhost:8888/posts/${id}`);
+      const response = await axios.get(`https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${id}`);
       setPost(response.data);
     };
 
@@ -48,7 +48,7 @@ const PostDetail = ({ params }: any) => {
 
       if (isConfirmed) {
         try {
-          await axios.delete(`http://localhost:8888/posts/${id}`);
+          await axios.delete(`https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${id}`);
           window.location.href = "/post";
         } catch (error) {
           console.error("삭제 중 오류 발생:", error);

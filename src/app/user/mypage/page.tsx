@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import SkeletonMypage from "./SkeletonMypage";
 import UserInfo from "./UserInfo";
 import PasswordChange from "./PasswordChange";
-import PostItem from "@/app/post/components/PostItem";
 
 const Mypage = () => {
   const [posts, setPosts] = useState<any[]>([]);
@@ -13,7 +12,7 @@ const Mypage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000); // 로딩 시간 조정 (예: 1초)
+    });
 
     return () => clearTimeout(timer);
   }, []);
@@ -22,14 +21,9 @@ const Mypage = () => {
     const fetchData = async () => {
       const response = await fetch("/data/data.json");
       const data = await response.json();
-      console.log("Fetched data:", data);
-
       const userId = localStorage.getItem("userId");
-      console.log("User ID from localStorage:", userId);
-
       if (userId) {
         const userPosts = data.filter((post: any) => post.userId === userId);
-        console.log("Filtered posts:", userPosts);
         setPosts(userPosts);
       } else {
         setPosts(data);
@@ -41,7 +35,7 @@ const Mypage = () => {
   const getUserData = async () => {
     const userId = localStorage.getItem("userId");
     if (userId) {
-      const url = "http://localhost:8888/users";
+      const url = "https://my-json-server.typicode.com/changwoo-yu/Health-project/users";
       const response = await fetch(url);
       const data = await response.json();
       const user = data.find((user: any) => user.id === userId);

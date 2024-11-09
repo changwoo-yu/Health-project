@@ -21,7 +21,7 @@ const Upload = () => {
   useEffect(() => {
     const fetchPost = async () => {
       if (id) {
-        const response = await axios.get(`http://localhost:8888/posts/${id}`);
+        const response = await axios.get(`https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${id}`);
         setPost(response.data);
         setTitle(response.data.title);
         setContent(response.data.content);
@@ -38,7 +38,7 @@ const Upload = () => {
       if (storedUserId) {
         setUserId(storedUserId);
         try {
-          const response = await axios.get("http://localhost:8888/users");
+          const response = await axios.get("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
           const user = response.data.find((user: any) => user.id === storedUserId);
 
           if (user) {
@@ -80,11 +80,17 @@ const Upload = () => {
     try {
       if (id) {
         // 수정 요청: ID가 있을 경우 PUT 요청
-        const response = await axios.put(`http://localhost:8888/posts/${id}`, postContent);
+        const response = await axios.put(
+          `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${id}`,
+          postContent
+        );
         console.log("수정 성공:", response.data);
       } else {
         // 새 글 등록: ID가 없을 경우 POST 요청
-        const response = await axios.post("http://localhost:8888/posts", postContent);
+        const response = await axios.post(
+          "https://my-json-server.typicode.com/changwoo-yu/Health-project/posts",
+          postContent
+        );
         console.log("성공한 데이터:", response.data);
       }
       router.push("/post");

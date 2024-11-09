@@ -16,10 +16,12 @@ const CommentSection = ({ postId }: any) => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await axios.get(`http://localhost:8888/posts/${postId}`);
+      const response = await axios.get(
+        `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${postId}`
+      );
       setComments(response.data.comments || []);
     };
-
+    
     fetchPost();
   }, [postId]);
 
@@ -29,7 +31,7 @@ const CommentSection = ({ postId }: any) => {
 
       if (userId) {
         try {
-          const response = await axios.get("http://localhost:8888/users");
+          const response = await axios.get("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
           const user = response.data.find((user: any) => user.id === userId);
 
           if (user) {
@@ -60,9 +62,12 @@ const CommentSection = ({ postId }: any) => {
     };
 
     try {
-      const response = await axios.patch(`http://localhost:8888/posts/${postId}`, {
-        comments: [...comments, commentData],
-      });
+      const response = await axios.patch(
+        `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${postId}`,
+        {
+          comments: [...comments, commentData],
+        }
+      );
       setComments(response.data.comments);
       setNewComment("");
     } catch (error) {
