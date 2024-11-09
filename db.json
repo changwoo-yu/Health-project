@@ -132,6 +132,12 @@
       "password": "dkssud123",
       "name": "안녕",
       "phone": "010-2012-0110"
+    },
+    {
+      "id": "qqqqqqqqq",
+      "password": "a1234567",
+      "name": "ddd",
+      "phone": "232-3232-3232"
     }
   ]
 }

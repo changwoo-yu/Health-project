@@ -10,7 +10,7 @@ import QuillEditor from "./QuillEditor";
 const Upload = () => {
   const query = new URLSearchParams(window.location.search);
   const id = query.get("id");
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState<any | null>(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
