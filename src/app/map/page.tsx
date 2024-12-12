@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Map, MapMarker, MapTypeControl } from "react-kakao-maps-sdk";
 import useKakaoLoader from "./useKakaoLoader";
 
@@ -11,7 +11,6 @@ export default function CombinedMap() {
   const mapRef = useRef<kakao.maps.Map>(null);
   const [info, setInfo] = useState<string>("");
   const [position, setPosition] = useState<{ lat: number; lng: number } | null>(null);
-  useKakaoLoader();
 
   const getInfo = () => {
     const map = mapRef.current;
@@ -32,6 +31,10 @@ export default function CombinedMap() {
     message += "북동쪽 좌표는 " + neLatLng.getLat() + ", " + neLatLng.getLng() + " 입니다";
     setInfo(message);
   };
+
+  useEffect(() => {
+    useKakaoLoader();
+  }, []);
 
   return (
     <div className="mx-auto max-w-full mb-16 md:w-[1000px]">

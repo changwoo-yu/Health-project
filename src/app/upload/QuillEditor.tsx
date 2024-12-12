@@ -5,13 +5,13 @@ import { ImageResize } from "quill-image-resize-module-ts";
 import { Quill } from "react-quill";
 import { ImageDrop } from "quill-image-drop-module";
 
-Quill.register("modules/ImageResize", ImageResize);
-Quill.register("modules/imageDrop", ImageDrop);
-
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
+
+Quill.register("modules/ImageResize", ImageResize);
+Quill.register("modules/imageDrop", ImageDrop);
 
 const QuillEditor = ({ content, setContent }: any) => {
   const modules = useMemo(
