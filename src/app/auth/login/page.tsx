@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useAuth } from "@/app/context/AuthContext";
 import SkeletonLogin from "./SkeletonLogin";
+import Image from "next/image";
 
 const Login = ({ onLogin }: any) => {
   const [loading, setLoading] = useState(true);
@@ -61,7 +62,7 @@ const Login = ({ onLogin }: any) => {
         </button>
       </div>
       <div className="flex flex-col justify-center items-center">
-        <img src="/images/welcome.png" alt="헬스장 기구" className="w-[400px] rounded-md " />
+        <Image src="/images/welcome.png" alt="헬스장 기구" width={400} height={300} className="rounded-md" />
         <form onSubmit={handleLoginClick} className="flex flex-col mx-auto max-w-[400px] w-full">
           <div className="flex flex-col mt-5">
             <span className="font-bold">아이디</span>

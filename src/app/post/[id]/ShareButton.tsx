@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 
 const ShareButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,11 +38,23 @@ const ShareButton = () => {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg z-10">
           <div className="flex items-center p-2 cursor-pointer hover:bg-gray-100" onClick={handleKakaoShare}>
-            <img src="" alt="KakaoTalk" className="w-6 h-6 mr-2" />
+            <Image
+              src="/images/kakaotalk-icon.png" // KakaoTalk 아이콘의 경로
+              alt="KakaoTalk"
+              width={24} // 아이콘의 너비
+              height={24} // 아이콘의 높이
+              className="mr-2"
+            />
             <span>카카오톡</span>
           </div>
           <div className="flex items-center p-2 cursor-pointer hover:bg-gray-100" onClick={handleCopy}>
-            <img src="" alt="주소 복사" className="w-6 h-6 mr-2" />
+            <Image
+              src="/images/copy-icon.png" // 주소 복사 아이콘의 경로
+              alt="주소 복사"
+              width={24} // 아이콘의 너비
+              height={24} // 아이콘의 높이
+              className="mr-2"
+            />
             <span>주소 복사</span>
           </div>
         </div>

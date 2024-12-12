@@ -2,6 +2,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar, Autoplay } from "swiper/modules";
 import SwiperCore from "swiper";
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -38,7 +39,13 @@ export default function SwiperImg() {
         {slideData.map((slide) => (
           <SwiperSlide key={slide.id}>
             <div className="flex justify-center items-center">
-              <img className="w-[600px] h-[300px] rounded-lg shadow-lg" src={slide.img} alt="스와이퍼 사진" />
+              <Image
+                className="w-[600px] h-[300px] rounded-lg shadow-lg"
+                src={slide.img} // 이미지 경로
+                alt="스와이퍼 사진" // 이미지 설명
+                width={600} // 이미지 너비
+                height={300} // 이미지 높이
+              />
             </div>
           </SwiperSlide>
         ))}

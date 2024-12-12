@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import Image from "next/image";
 
 const Notice = () => {
   const [loading, setLoading] = useState(true);
@@ -60,7 +61,13 @@ const Notice = () => {
               <p className="mr-8 flex-1">{notice.description}</p>
             </div>
             <div className="flex items-center">
-              <img src="/images/welcome.png" alt="공지사항 사진" className="mx-auto m-4 max-w-[150px] h-[150px]" />
+              <Image
+                src="/images/welcome.png" // 이미지 경로
+                alt="공지사항 사진" // 이미지 설명
+                width={150} // 이미지 너비
+                height={150} // 이미지 높이
+                className="mx-auto m-4" // 클래스 추가
+              />
             </div>
           </div>
         ))}

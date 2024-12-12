@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import ShareButton from "./ShareButton";
 import CommentSection from "./CommentSection";
+import Image from "next/image";
 
 interface Post {
   id: any;
@@ -78,7 +79,13 @@ const PostDetail = ({ params }: any) => {
           className="mt-12 font-bold mb-5 text-gray-600 h-[200px]"
           dangerouslySetInnerHTML={{ __html: post.content }}
         ></p>
-        <img src={post.imageUrl} alt="" className="mb-4" />
+        <Image
+          src={post.imageUrl} // 이미지 URL
+          alt="Post Image" // 이미지에 대한 설명
+          width={600} // 이미지의 너비
+          height={400} // 이미지의 높이
+          className="mb-4"
+        />
 
         <div className="flex justify-between items-center mt-4">
           <div>
