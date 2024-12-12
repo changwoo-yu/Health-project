@@ -12,7 +12,7 @@ interface InputFieldProps {
 
 const InputField: React.FC<InputFieldProps> = ({ label, type, placeholder, value, onChange, message, isValid }) => {
   return (
-    <div className="flex flex-col mb-4 mx-auto max-w-[400px] md:w-[400px]">
+    <div className="flex flex-col mb-4 mx-auto max-w-[400px] md:w-[400px] w-full">
       <span className="font-bold">{label}</span>
       <input
         type={type}

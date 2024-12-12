@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
-    "json-server": "json-server --watch db.json --port 8888",
-    "deploy": "next build && touch out/.nojekyll && git add -f out/ && git commit -m \"Deploy\" && git subtree push --prefix out origin gh-pages"
+    "json-server": "json-server --watch db.json --port 8888"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -21,6 +20,7 @@
     "json-server": "^1.0.0-beta.2",
     "next": "14.2.5",
     "next-share": "^0.27.0",
+    "nodemailer": "^6.9.16",
     "quill-image-drop-module": "^1.0.3",
     "quill-image-resize-module-react": "^3.0.0",
     "quill-image-resize-module-ts": "^3.0.3",

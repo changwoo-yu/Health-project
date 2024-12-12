@@ -20,6 +20,10 @@ const Signup = () => {
   const [phone, setPhone] = useState("");
   const [nickName, setNickName] = useState("");
   const [numberAuth, setNumberAuth] = useState("");
+  const [isAgreed, setIsAgreed] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailMessage, setEmailMessage] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,15 +32,40 @@ const Signup = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const onChangeId = (e: any) => {
+  const checkIdExists = async (id: any) => {
+    const response = await fetch("http://localhost:8888/users");
+    const users = await response.json();
+    return users.some((user: any) => user.id === id);
+  };
+
+  const checkEmailExists = async (email: any) => {
+    const response = await fetch("http://localhost:8888/users");
+    const users = await response.json();
+    return users.some((user: any) => user.email === email);
+  };
+
+  const onChangeId = async (e: any) => {
     const currentId = e.target.value;
-    setId(currentId);
+    const regex = /^[a-zA-Z0-9]*$/;
+
+    if (!regex.test(currentId)) {
+      setId(currentId.replace(/[^a-zA-Z0-9]/g, ""));
+    } else {
+      setId(currentId);
+    }
+
     if (currentId.length < 5) {
       setIdMessage("5자리 이상 입력해주세요");
       setIsId(false);
     } else {
-      setIdMessage("사용가능한 아이디 입니다.");
-      setIsId(true);
+      const exists = await checkIdExists(currentId);
+      if (exists) {
+        setIdMessage("이미 존재하는 아이디입니다.");
+        setIsId(false);
+      } else {
+        setIdMessage("사용가능한 아이디 입니다.");
+        setIsId(true);
+      }
     }
   };
 
@@ -62,6 +91,26 @@ const Signup = () => {
     } else {
       setPasswordConfirmMessage("비밀번호가 같습니다.");
       setIsPasswordConfirm(true);
+    }
+  };
+
+  const onChangeEmail = async (e: any) => {
+    const currentEmail = e.target.value;
+    setEmail(currentEmail);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(currentEmail)) {
+      setEmailMessage("유효한 이메일 주소를 입력해주세요.");
+      setIsEmailValid(false);
+    } else {
+      const exists = await checkEmailExists(currentEmail);
+      if (exists) {
+        setEmailMessage("이미 존재하는 이메일입니다.");
+        setIsEmailValid(false);
+      } else {
+        setEmailMessage("사용 가능한 이메일입니다.");
+        setIsEmailValid(true);
+      }
     }
   };
 
@@ -98,7 +147,7 @@ const Signup = () => {
   const handleSignup = async (e: any) => {
     e.preventDefault();
 
-    if (!isId || !isPassword || !isPasswordConfirm || !nickName || !phone) {
+    if (!isId || !isPassword || !isPasswordConfirm || !nickName || !phone || !isAgreed || !isEmailValid) {
       alert("모든 필드를 올바르게 입력해 주세요.");
       return;
     }
@@ -108,10 +157,11 @@ const Signup = () => {
       password,
       name: nickName,
       phone,
+      email,
     };
 
     try {
-      const response = await fetch("https://my-json-server.typicode.com/changwoo-yu/Health-project/users", {
+      const response = await fetch("http://localhost:8888/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,6 +181,10 @@ const Signup = () => {
     }
   };
 
+  const handleAgreeChange = (e: any) => {
+    setIsAgreed(e.target.checked);
+  };
+
   if (loading) {
     return <SkeletonSignUp />;
   }
@@ -140,7 +194,7 @@ const Signup = () => {
       <div className="flex justify-center items-center">
         <h1 className="m-4 mt-8 text-2xl font-bold mb-4">회원가입</h1>
       </div>
-      <form onSubmit={handleSignup} className="flex flex-col items-center">
+      <form onSubmit={handleSignup} className="flex flex-col items-center mx-auto max-w-[400px] w-full">
         <InputField
           label="아이디"
           type="text"
@@ -169,6 +223,15 @@ const Signup = () => {
           isValid={isPasswordConfirm}
         />
         <InputField
+          label="이메일 입력"
+          type="email"
+          placeholder="ex) hana1213@naver.com"
+          value={email}
+          onChange={onChangeEmail}
+          message={emailMessage}
+          isValid={isEmailValid}
+        />
+        <InputField
           label="이름"
           type="text"
           placeholder="이름 입력"
@@ -185,10 +248,10 @@ const Signup = () => {
           onChange={onChangePhone}
           isValid={true}
         />
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center w-full">
           <button
             type="button"
-            className="p-2 font-bold rounded-md mb-4 bg-gray-100 mx-auto max-w-[400px] md:w-[400px] transition duration-200 ease-in-out 
+            className="p-2 font-bold rounded-md mb-4 bg-gray-100 mx-auto max-w-[400px] w-full transition duration-200 ease-in-out 
                       hover:bg-gray-200 
                       active:scale-95 active:bg-gray-300"
           >
@@ -205,31 +268,36 @@ const Signup = () => {
           isValid={true}
         />
 
-        <div className="flex justify-center items-center mx-auto max-w-[400px]">
+        <div className="flex justify-center items-center w-full">
           <button
             type="button"
-            className="p-2 mr-2 font-bold rounded-md mt-2 mb-12 bg-gray-100 mx-auto md:w-[200px] max-w-[200px] transition duration-200 ease-in-out 
-          hover:bg-gray-200 
-          active:scale-95 active:bg-gray-300"
+            className="flex-1 p-2 mr-2 font-bold rounded-md mt-2 mb-12 bg-gray-100 transition duration-200 ease-in-out 
+              hover:bg-gray-200 
+              active:scale-95 active:bg-gray-300"
           >
             재인증
           </button>
           <button
             type="button"
-            className="p-2 font-bold rounded-md mt-2 mb-12 bg-gray-100 mx-auto md:w-[200px] max-w-[200px] transition duration-200 ease-in-out 
-        hover:bg-gray-200 
-        active:scale-95 active:bg-gray-300"
+            className="flex-1 p-2 font-bold rounded-md mt-2 mb-12 bg-gray-100 transition duration-200 ease-in-out 
+              hover:bg-gray-200 
+              active:scale-95 active:bg-gray-300"
           >
             인증
           </button>
         </div>
         <div className="flex justify-center items-center">
-          <UseAgree id="agree" label="저는 이용약관 및 개인정보처리방침에 동의합니다." />
+          <UseAgree
+            onChange={handleAgreeChange}
+            checked={isAgreed}
+            id="agree"
+            label="저는 이용약관 및 개인정보처리방침에 동의합니다."
+          />
         </div>
-        <div className="flex justify-center items-center mb-12 ">
+        <div className="flex justify-center items-center mb-12 w-full">
           <button
             type="submit"
-            className="p-2 font-bold rounded-md mt-4 bg-blue-400 text-white mx-auto max-w-[400px] md:w-[400px] 
+            className="p-2 font-bold rounded-md mt-4 bg-blue-400 text-white mx-auto max-w-[400px] w-full  
                       transition duration-200 ease-in-out 
                       hover:bg-blue-500 
                       active:scale-95 active:bg-blue-600"

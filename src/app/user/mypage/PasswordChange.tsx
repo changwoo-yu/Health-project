@@ -1,5 +1,5 @@
-"use client";
-import React, { useEffect, useState } from "react";
+"use cle";
+import React, { useState } from "react";
 import axios from "axios";
 
 const PasswordChange = () => {
@@ -8,14 +8,8 @@ const PasswordChange = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isTrue, setIsTrue] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUserId = localStorage.getItem("userId");
-      setUserId(storedUserId);
-    }
-  }, []);
+  const userId = localStorage.getItem("userId");
 
   const handlePasswordChange = async (e: any) => {
     e.preventDefault();
@@ -39,9 +33,7 @@ const PasswordChange = () => {
     }
 
     try {
-      const response = await axios.get(
-        `https://my-json-server.typicode.com/changwoo-yu/Health-project/users/${userId}`
-      );
+      const response = await axios.get(`http://localhost:8888/users/${userId}`);
 
       if (response.data.password !== currentPassword) {
         setMessage("현재 비밀번호가 틀립니다.");
@@ -55,7 +47,7 @@ const PasswordChange = () => {
         return;
       }
 
-      await axios.patch(`https://my-json-server.typicode.com/changwoo-yu/Health-project/users/${userId}`, {
+      await axios.patch(`http://localhost:8888/users/${userId}`, {
         password: newPassword,
       });
 
@@ -71,7 +63,7 @@ const PasswordChange = () => {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <form onSubmit={handlePasswordChange} className="flex flex-col mx-auto max-w-[400px] mb-16 md:w-[500px]">
+      <form onSubmit={handlePasswordChange} className="flex flex-col mx-auto max-w-[400px] mb-16 w-full">
         <span className="mb-2 font-bold">현재 비밀번호</span>
         <input
           type="password"
@@ -107,7 +99,8 @@ const PasswordChange = () => {
         <button
           type="submit"
           className="mt-4 p-2 mb-4 rounded-md bg-blue-400 text-white transition duration-200 ease-in-out 
-                      hover:bg-blue-500"
+                      hover:bg-blue-500 
+                      active:scale-95 active:bg-blue-600"
         >
           비밀번호 변경
         </button>

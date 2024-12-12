@@ -23,14 +23,12 @@ const PostDetail = ({ params }: any) => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await axios.get(`https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${id}`);
+      const response = await axios.get(`http://localhost:8888/posts/${id}`);
       setPost(response.data);
     };
 
-    if (typeof window !== "undefined") {
-      const storedUserId = localStorage.getItem("userId");
-      setUserId(storedUserId);
-    }
+    const storedUserId = localStorage.getItem("userId");
+    setUserId(storedUserId);
 
     fetchPost();
   }, [id]);
@@ -50,7 +48,7 @@ const PostDetail = ({ params }: any) => {
 
       if (isConfirmed) {
         try {
-          await axios.delete(`https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${id}`);
+          await axios.delete(`http://localhost:8888/posts/${id}`);
           window.location.href = "/post";
         } catch (error) {
           console.error("삭제 중 오류 발생:", error);
@@ -84,10 +82,20 @@ const PostDetail = ({ params }: any) => {
 
         <div className="flex justify-between items-center mt-4">
           <div>
-            <button onClick={handleEdit} className="mr-3 p-2 rounded-md text-white bg-blue-400 w-[80px]">
+            <button
+              onClick={handleEdit}
+              className="mr-3 p-2 rounded-md text-white bg-blue-400 w-[80px] transition duration-200 ease-in-out 
+                      hover:bg-blue-500 
+                      active:scale-95 active:bg-blue-600"
+            >
               수정
             </button>
-            <button onClick={handleDelete} className="mr-3 p-2 rounded-md text-white bg-blue-400 w-[80px]">
+            <button
+              onClick={handleDelete}
+              className="mr-3 p-2 rounded-md text-white bg-blue-400 w-[80px] transition duration-200 ease-in-out 
+                      hover:bg-blue-500 
+                      active:scale-95 active:bg-blue-600"
+            >
               삭제
             </button>
           </div>

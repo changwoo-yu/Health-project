@@ -16,9 +16,7 @@ const CommentSection = ({ postId }: any) => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await axios.get(
-        `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${postId}`
-      );
+      const response = await axios.get(`http://localhost:8888/posts/${postId}`);
       setComments(response.data.comments || []);
     };
 
@@ -27,20 +25,18 @@ const CommentSection = ({ postId }: any) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (typeof window !== "undefined") {
-        const userId = localStorage.getItem("userId");
+      const userId = localStorage.getItem("userId");
 
-        if (userId) {
-          try {
-            const response = await axios.get("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
-            const user = response.data.find((user: { id: string }) => user.id === userId);
+      if (userId) {
+        try {
+          const response = await axios.get("http://localhost:8888/users");
+          const user = response.data.find((user: any) => user.id === userId);
 
-            if (user) {
-              setAuthor(user.name);
-            }
-          } catch (error) {
-            console.error("사용자 정보를 가져오는 중 오류 발생:", error);
+          if (user) {
+            setAuthor(user.name);
           }
+        } catch (error) {
+          console.error("사용자 정보를 가져오는 중 오류 발생:", error);
         }
       }
     };
@@ -64,12 +60,9 @@ const CommentSection = ({ postId }: any) => {
     };
 
     try {
-      const response = await axios.patch(
-        `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${postId}`,
-        {
-          comments: [...comments, commentData],
-        }
-      );
+      const response = await axios.patch(`http://localhost:8888/posts/${postId}`, {
+        comments: [...comments, commentData],
+      });
       setComments(response.data.comments);
       setNewComment("");
     } catch (error) {
@@ -83,9 +76,11 @@ const CommentSection = ({ postId }: any) => {
       <div>
         {comments.map((comment, index) => (
           <div key={index} className="border-b border-gray-300 p-2">
-            <div className="flex">
-              <p className="mb-2 mr-4 font-bold">작성자: {comment.author}</p>
-              <p className="mb-2 text-gray-600">올린 시간: {new Date(comment.createdAt).toLocaleString("ko-KR")}</p>
+            <div className="flex justify-between items-center">
+              <div className="flex">
+                <p className="mb-2 mr-4 font-bold">작성자: {comment.author}</p>
+                <p className="mb-2 text-gray-600">올린 시간: {new Date(comment.createdAt).toLocaleString("ko-KR")}</p>
+              </div>
             </div>
             <p>{comment.content}</p>
           </div>
@@ -100,7 +95,12 @@ const CommentSection = ({ postId }: any) => {
             className="border border-gray-300 rounded-md p-2 w-[100%] h-[40px] mr-5"
             placeholder="댓글을 입력하세요"
           />
-          <button type="submit" className="p-2 rounded-md bg-blue-200 text-blue-800 w-[70px] h-[40px]">
+          <button
+            type="submit"
+            className="p-2 rounded-md bg-blue-200 text-blue-800 w-[70px] h-[40px] transition duration-200 ease-in-out 
+                      hover:bg-blue-300 
+                      active:scale-95 active:bg-blue-400"
+          >
             등록
           </button>
         </div>

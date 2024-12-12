@@ -58,32 +58,32 @@ const FitHeader = ({ isLoggedIn, onLogout }: any) => {
             <ButtonHeader href="/user/mypage" isActive={router === "/user/mypage"} onClick={handleAuth}>
               마이페이지
             </ButtonHeader>
-            <ButtonHeader href="/user/notice" isActive={router === "/notice"}>
+            <ButtonHeader href="/user/notice" isActive={router === "/user/notice"}>
               공지사항
             </ButtonHeader>
           </nav>
           <ul className="flex flex-col space-y-2 ml-auto">
             {auth ? (
-              <button onClick={handleLogout}>로그아웃</button>
+              <div className="hidden md:block text-white hover:bg-gray-700 active:scale-95 transition duration-200 ease-in-out rounded-md p-2">
+                <button onClick={handleLogout}>로그아웃</button>
+              </div>
             ) : (
               <div className="flex space-x-4">
                 <Link href="/auth/login">
-                  <span
-                    className={`cursor-pointer ${
-                      router === "/login" ? "text-blue-300" : "text-white"
-                    } hidden md:block transition duration-200 ease-in-out hover:text-blue-350`}
+                  <button
+                    className={`hidden md:block cursor-pointer text-white bg-transparent hover:bg-gray-700 active:scale-95 active:transform transition duration-200 ease-in-out rounded-md p-2 
+              ${router === "/auth/login" ? "text-blue-300 font-bold" : "hover:text-blue-350"}`}
                   >
                     로그인
-                  </span>
+                  </button>
                 </Link>
                 <Link href="/auth/signup">
-                  <span
-                    className={`cursor-pointer ${
-                      router === "/signup" ? "text-blue-300" : "text-white"
-                    } hidden md:block transition duration-200 ease-in-out hover:text-blue-350`}
+                  <button
+                    className={`hidden md:block cursor-pointer text-white bg-transparent hover:bg-gray-700 active:scale-95 active:transform transition duration-200 ease-in-out rounded-md p-2 
+                  ${router === "/auth/signup" ? "text-blue-300 font-bold" : "hover:text-blue-350"}`}
                   >
                     회원가입
-                  </span>
+                  </button>
                 </Link>
               </div>
             )}
@@ -93,7 +93,7 @@ const FitHeader = ({ isLoggedIn, onLogout }: any) => {
           </button>
         </header>
       </div>
-      {isMenuOpen && <Sidebar isOpen={isMenuOpen} toggleSidebar={toggleSidebar} />}
+      {isMenuOpen && <Sidebar isOpen={isMenuOpen} toggleSidebar={toggleSidebar} handleLogout={handleLogout} />}
     </div>
   );
 };

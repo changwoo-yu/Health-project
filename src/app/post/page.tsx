@@ -14,11 +14,12 @@ const Post = () => {
   const [selectPost, setSelectPost] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [lists, setList] = useState<any[]>([]);
-  const { auth, logout } = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
+  const { auth } = useAuth();
   const route = useRouter();
 
   const getList = async () => {
-    const url = `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts`;
+    const url = `http://localhost:8888/posts`;
     const response = await fetch(url);
     const data = await response.json();
     setList(data);
@@ -50,21 +51,17 @@ const Post = () => {
     setSelectPost(selectPost === index ? null : index);
   };
 
-  const routed = useRouter();
-  const search = (e: any) => {
-    if (e.key === "Enter") {
-      let keyword = e.target.value;
-      routed.push(`/${keyword}`);
-    }
+  const search = (value: any) => {
+    setSearchTerm(value);
   };
 
   const handleDelete = async (postId: any) => {
-    const response = await axios.delete(
-      `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${postId}`
-    );
+    const response = await axios.delete(`http://localhost:8888/posts/${postId}`);
     console.log("삭제된 데이터:", response.data);
     getList();
   };
+
+  const filteredPosts = lists.filter((post) => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   if (loading) {
     return <SkeletonPost />;
@@ -87,9 +84,17 @@ const Post = () => {
           </button>
         </Link>
       </div>
-
-      <SearchBar onSearch={search} />
-      <PostList lists={lists} selectPost={selectPost} handlePostClick={handlePostClick} handleDelete={handleDelete} />
+      <div className="bg-gray-100 p-4 m-4">
+        <div className="w-full">
+          <SearchBar onSearch={search} />
+          <PostList
+            lists={filteredPosts}
+            selectPost={selectPost}
+            handlePostClick={handlePostClick}
+            handleDelete={handleDelete}
+          />
+        </div>
+      </div>
     </div>
   );
 };

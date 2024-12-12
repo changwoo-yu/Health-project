@@ -14,16 +14,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // AuthProvider 컴포넌트 정의
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [auth, setAuth] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null); // 초기 상태는 null
-
-  useEffect(() => {
-    // 클라이언트에서만 localStorage에 접근
-    const storedAuth = localStorage.getItem("auth");
-    const storedUserId = localStorage.getItem("userId");
-    setAuth(storedAuth === "true");
-    setUserId(storedUserId); // 저장된 ID 설정
-  }, []);
+  const [auth, setAuth] = useState(() => localStorage.getItem("auth") === "true");
+  const [userId, setUserId] = useState(() => localStorage.getItem("userId")); // 로컬스토리지에서 초기 ID 가져오기
 
   const login = (id: string) => {
     setAuth(true);
@@ -38,6 +30,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem("auth"); // 로그아웃 시 로컬스토리지에서 제거
     localStorage.removeItem("userId"); // 로그아웃 시 ID 제거
   };
+
+  useEffect(() => {
+    const storedAuth = localStorage.getItem("auth");
+    const storedUserId = localStorage.getItem("userId");
+    setAuth(storedAuth === "true");
+    setUserId(storedUserId); // 저장된 ID 설정
+  }, []);
 
   return <AuthContext.Provider value={{ auth, userId, login, logout }}>{children}</AuthContext.Provider>;
 };

@@ -1,7 +1,10 @@
 import React from "react";
 import Link from "next/link";
+import { useAuth } from "@/app/context/AuthContext";
 
-const Sidebar = ({ isOpen, toggleSidebar }: any) => {
+const Sidebar = ({ isOpen, toggleSidebar, handleLogout }: any) => {
+  const { auth, logout } = useAuth();
+
   return (
     <div
       className={`fixed top-0 right-0 h-full w-64 bg-gray-800 text-white shadow-lg transition-transform transform ${
@@ -24,15 +27,25 @@ const Sidebar = ({ isOpen, toggleSidebar }: any) => {
         <Link href="/user/notice">
           <li className="cursor-pointer hover:text-gray-400 mb-4">공지사항</li>
         </Link>
-        <Link href="/auth/login">
-          <li className="cursor-pointer hover:text-gray-400 mb-4">로그인</li>
-        </Link>
-        <Link href="/auth/signup">
-          <li className="cursor-pointer hover:text-gray-400 mb-4">회원가입</li>
-        </Link>
+
+        {auth ? (
+          <Link href="/">
+            <li className="cursor-pointer hover:text-gray-400 mb-4" onClick={handleLogout}>
+              로그아웃
+            </li>
+          </Link>
+        ) : (
+          <>
+            <Link href="/auth/login">
+              <li className="cursor-pointer hover:text-gray-400 mb-4">로그인</li>
+            </Link>
+            <Link href="/auth/signup">
+              <li className="cursor-pointer hover:text-gray-400 mb-4">회원가입</li>
+            </Link>
+          </>
+        )}
       </ul>
     </div>
   );
 };
-
 export default Sidebar;

@@ -1,16 +1,15 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/context/AuthContext";
-import Link from "next/link";
-import SkeletonLogin from "./SkeletonLogin";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useAuth } from "@/app/context/AuthContext";
+import SkeletonLogin from "./SkeletonLogin";
 
 const Login = ({ onLogin }: any) => {
   const [loading, setLoading] = useState(true);
   const { login } = useAuth();
   const router = useRouter();
-  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,13 +19,6 @@ const Login = ({ onLogin }: any) => {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const storedUserId = localStorage.getItem("userId");
-    if (storedUserId) {
-      setUserId(storedUserId);
-    }
-  }, []);
-
   const handleLoginClick = async (e: any) => {
     e.preventDefault();
 
@@ -34,7 +26,7 @@ const Login = ({ onLogin }: any) => {
     const passwordInput = e.target.password.value;
 
     try {
-      const response = await fetch("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
+      const response = await fetch("http://localhost:8888/users");
       const users = await response.json();
 
       const user = users.find((user: any) => user.id === idInput && user.password === passwordInput);
@@ -58,7 +50,7 @@ const Login = ({ onLogin }: any) => {
   }
 
   return (
-    <div className="text-sm max-w-screen-lg mx-auto overflow-hidden mt-4">
+    <div className="text-sm max-w-screen-lg mx-auto mt-4">
       <div className="flex justify-end">
         <button
           className="m-4 text-gray-400 font-bold transition duration-200 ease-in-out 
@@ -70,14 +62,14 @@ const Login = ({ onLogin }: any) => {
       </div>
       <div className="flex flex-col justify-center items-center">
         <img src="/images/welcome.png" alt="헬스장 기구" className="w-[400px] rounded-md " />
-        <form onSubmit={handleLoginClick} className="flex flex-col mx-auto max-w-[400px] md:w-[400px]">
+        <form onSubmit={handleLoginClick} className="flex flex-col mx-auto max-w-[400px] w-full">
           <div className="flex flex-col mt-5">
             <span className="font-bold">아이디</span>
             <input
               className="border border-gray-300 p-3 mt-2 rounded-md w-full"
               type="text"
               name="id"
-              placeholder="예) example@gmail.com"
+              placeholder="아이디 입력"
               required
             />
           </div>
@@ -93,15 +85,15 @@ const Login = ({ onLogin }: any) => {
           </div>
           <button
             type="submit"
-            className="p-2 font-bold rounded-md mb-5 mt-5 bg-blue-400 text-white mx-auto md:w-[400px] max-w-[400px] transition duration-200 ease-in-out 
+            className="p-2 rounded-md mb-5 mt-5 bg-blue-400 text-white mx-auto w-full max-w-[400px] transition duration-200 ease-in-out 
                         hover:bg-blue-500 
                         active:scale-95 active:bg-blue-600"
           >
             로그인
           </button>
         </form>
-        <div className="flex justify-center items-center text-gray-500">
-          <Link href="/auth/idfind">
+        <div className="text-gray-500">
+          <Link href="/auth/authFind">
             <button
               className="transition duration-200 ease-in-out 
                       hover:text-gray-400 
@@ -111,15 +103,17 @@ const Login = ({ onLogin }: any) => {
             </button>
           </Link>
         </div>
-        <Link href="/auth/signup">
-          <button
-            className="p-2 font-bold rounded-md mt-5 mb-12 bg-gray-100 mx-auto md:w-[400px] max-w-[400px] transition duration-200 ease-in-out 
+        <div className="max-w-[400px] w-full">
+          <Link href="/auth/signup">
+            <button
+              className="p-2 font-bold rounded-md mt-5 mb-12 bg-gray-100 mx-auto w-full max-w-[400px] transition duration-200 ease-in-out 
                       hover:bg-gray-200 
                       active:scale-95 active:bg-gray-300"
-          >
-            회원가입
-          </button>
-        </Link>
+            >
+              회원가입
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

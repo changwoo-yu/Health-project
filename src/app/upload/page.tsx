@@ -10,7 +10,7 @@ import QuillEditor from "./QuillEditor";
 const Upload = () => {
   const query = new URLSearchParams(window.location.search);
   const id = query.get("id");
-  const [post, setPost] = useState<any | null>(null);
+  const [post, setPost] = useState(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ const Upload = () => {
   useEffect(() => {
     const fetchPost = async () => {
       if (id) {
-        const response = await axios.get(`https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${id}`);
+        const response = await axios.get(`http://localhost:8888/posts/${id}`);
         setPost(response.data);
         setTitle(response.data.title);
         setContent(response.data.content);
@@ -33,21 +33,19 @@ const Upload = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (typeof window !== "undefined") {
-        const storedUserId = localStorage.getItem("userId");
+      const storedUserId = localStorage.getItem("userId");
 
-        if (storedUserId) {
-          setUserId(storedUserId);
-          try {
-            const response = await axios.get("https://my-json-server.typicode.com/changwoo-yu/Health-project/users");
-            const user = response.data.find((user: any) => user.id === storedUserId);
+      if (storedUserId) {
+        setUserId(storedUserId);
+        try {
+          const response = await axios.get("http://localhost:8888/users");
+          const user = response.data.find((user: any) => user.id === storedUserId);
 
-            if (user) {
-              setAuthor(user.name);
-            }
-          } catch (error) {
-            console.error("사용자 정보를 가져오는 중 오류 발생:", error);
+          if (user) {
+            setAuthor(user.name);
           }
+        } catch (error) {
+          console.error("사용자 정보를 가져오는 중 오류 발생:", error);
         }
       }
     };
@@ -82,17 +80,11 @@ const Upload = () => {
     try {
       if (id) {
         // 수정 요청: ID가 있을 경우 PUT 요청
-        const response = await axios.put(
-          `https://my-json-server.typicode.com/changwoo-yu/Health-project/posts/${id}`,
-          postContent
-        );
+        const response = await axios.put(`http://localhost:8888/posts/${id}`, postContent);
         console.log("수정 성공:", response.data);
       } else {
         // 새 글 등록: ID가 없을 경우 POST 요청
-        const response = await axios.post(
-          "https://my-json-server.typicode.com/changwoo-yu/Health-project/posts",
-          postContent
-        );
+        const response = await axios.post("http://localhost:8888/posts", postContent);
         console.log("성공한 데이터:", response.data);
       }
       router.push("/post");

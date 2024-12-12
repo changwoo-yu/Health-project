@@ -1,7 +1,6 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 
-
 const SkeletonMypage = () => {
   return (
     <div className="text-sm max-w-screen-lg mx-auto overflow-hidden mt-4">

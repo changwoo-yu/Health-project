@@ -5,19 +5,19 @@ interface ButtonHeaderProps {
   href: string;
   isActive: boolean;
   children: React.ReactNode;
-  onClick?: (e: React.MouseEvent) => void; 
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 const ButtonHeader: React.FC<ButtonHeaderProps> = ({ href, isActive, children, onClick }) => {
   return (
     <Link href={href} onClick={onClick}>
-      <span
-        className={`${
-          isActive ? "text-blue-300" : "text-white"
-        } cursor-pointer transition duration-200 ease-in-out hover:text-blue-350`}
+      <button
+        className={`text-white bg-transparent hover:bg-gray-700 active:scale-95 active:transform transition duration-200 ease-in-out rounded-md p-2 ${
+          isActive ? "font-bold" : ""
+        }`}
       >
         {children}
-      </span>
+      </button>
     </Link>
   );
 };
