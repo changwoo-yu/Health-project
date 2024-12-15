@@ -1,6 +1,7 @@
 # <img src="https://github.com/user-attachments/assets/9b5d0cec-9736-45a0-b3c1-910c6e489095" alt="헬스프로젝트" width="20" />  PoketFit - 헬스장 게시글 프로젝트
 ![health](https://github.com/user-attachments/assets/ce37095e-d2f8-420a-a6c8-51f7d306bf5b)
 ### PoketFit 프로젝트 URL : [링크](https://www.poketfit.com/)
+현재 개발 중인 프로젝트에 링크가 빌드 문제로 인해 들어가지고 있지 않아 해결중입니다.
 <br/>
 <br/>
 
