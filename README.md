@@ -1,6 +1,6 @@
 # <img src="https://github.com/user-attachments/assets/9b5d0cec-9736-45a0-b3c1-910c6e489095" alt="헬스프로젝트" width="20" />  PoketFit - 헬스장 게시글 프로젝트
 ![health](https://github.com/user-attachments/assets/ce37095e-d2f8-420a-a6c8-51f7d306bf5b)
-### PoketFit 프로젝트 URL : [링크](https://www.ner.com/)
+### PoketFit 프로젝트 URL : [링크](https://www.poketfit.com/)
 <br/>
 <br/>
 
@@ -22,7 +22,7 @@
 
 ### back-end
 * **Json-server**
-  *프로젝트를 개발할때 백엔드가 없고, 서버를 구축할 시간이 부족했기 때문에 Json-server를 사용했습니다.
+  프로젝트를 개발할때 백엔드가 없고, 서버를 구축할 시간이 부족했기 때문에 Json-server를 사용했습니다.
   * 유저 데이터와 게시글 데이터를 Json-server에 저장하고, 로컬스토리지와 연동하여 원하는 데이터를 쉽게 조회할 수 있었습니다.
 
 ### 버전 및 이슈관리
